@@ -32,9 +32,9 @@ pipeline {
         stage('Deployment') {
             steps {
                sshagent(['deploy-user']) {
-        sh "scp -o StrictHostKeyChecking=no webapp/target/gamutgurus.war ec2-user@13.233.123.220:8090:/home/ubuntu/pratap/apache-tomcat-10.0.22/webapps"
+        sh "scp -o StrictHostKeyChecking=no webapp/target/gamutgurus.war ec2-user@13.127.154.94:8090:/home/ubuntu/pratap/apache-tomcat-10.0.22/webapps"
 	}
         }
     }
-    }
+   }
     }
