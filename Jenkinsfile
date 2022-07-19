@@ -31,9 +31,9 @@ pipeline {
 
         stage('Deployment') {
             steps {
-                sh 'sshpass -p "gamut" scp target/gamutgurus.war gamut@172.17.0.3:/home/gamut/Distros/apache-tomcat-9.0.59/webapps'
-                sh 'sshpass -p "gamut" ssh gamut@172.17.0.3 "/home/gamut/Distros/apache-tomcat-9.0.59/bin/startup.sh"'
-            }
+               sshagent(['deploy-user']) {
+        sh "scp -o StrictHostKeyChecking=no webapp/target/gamutgurus.war ec2-user@13.233.123.220:8090:/home/ubuntu/pratap/apache-tomcat-10.0.22/webapps"
+	}
         }
     }
-}
+    }
