@@ -38,11 +38,18 @@ pipeline {
 	}
 	stage('Startup') {
 	 steps {
-	  sh "/home/ubuntu/pratap/apache-tomcat-10.0.22/bin/startup.sh"
+	  sh "cd /home/ubuntu/pratap/apache-tomcat-10.0.22/bin"
 	 
 	}
         }
 	
-       }
+ 	stage('Tomcat starting') {
+         steps {
+          sh "startup.sh"
+
+        }
+        }
+
+	}
        }
   
