@@ -33,15 +33,17 @@ pipeline {
             steps {
                sshagent(['deploy-user']) {
         sh "cp /var/lib/jenkins/workspace/gamut/target/gamutgurus.war /home/ubuntu/pratap/apache-tomcat-10.0.22/webapps"  
-	stage('startup') {
+	}
+	}
+	stage('Startup') {
 	 steps {
 	  sh "/home/ubuntu/pratap/apache-tomcat-10.0.22/bin/startup.sh"
 
 	 
 	}
 }
-	}
-        }
+	
+       }
     }
    }
     }
