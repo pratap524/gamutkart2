@@ -1,55 +1,21 @@
 pipeline {
-    agent any
+	agent any
+	stages {
+		stage('clone the code'){
+			steps {
+		sh "checkout scm" 
+		}
+		}
 
-//	tools {
-//		maven 'maven3.6'
-//	}
-//	environment {
-//		M2_INSTALL = "/usr/bin/mvn"
-//	}
-
-    stages {
-        stage('Clone-Repo') {
-	    steps {
-	        checkout scm
-	    }
-        }
-
-        stage('Build') {
-            steps {
-                sh 'mvn install -Dmaven.test.skip=true'
-            }
-        }
-		
-        stage('Unit Tests') {
-            steps {
-                sh 'mvn compiler:testCompile'
-                sh 'mvn surefire:test'
-                junit 'target/**/*.xml'
-            }
-        }
-
-        stage('Deployment') {
-            steps {
-               sshagent(['deploy-user']) {
-        sh "cp /var/lib/jenkins/workspace/gamut/target/gamutgurus.war /home/ubuntu/pratap/apache-tomcat-10.0.22/webapps"  
-	}
-	}
-	}
-	stage('Startup') {
-	 steps {
-	  sh "cd /home/ubuntu/pratap/apache-tomcat-10.0.22/bin"
-	 
-	}
-        }
-	
- 	stage('Tomcat starting') {
-         steps {
-          sh "startup.sh"
-
-        }
-        }
-
-	}
-       }
-  
+		stage(build) {
+			steps {
+		sh "mvn install"
+	               }
+	               }
+		stage(image building) {
+		script {
+		sh "docker build -t nginx-pratap ." 
+			}
+			}
+		}
+		}
