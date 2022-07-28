@@ -12,10 +12,5 @@ pipeline {
 		sh "mvn install"
 	               }
 	               }
-		stage(image building) {
-		script {
-		sh "docker build -t nginx-pratap ." 
-			}
-			}
 		}
 		}
