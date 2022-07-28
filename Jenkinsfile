@@ -29,5 +29,11 @@ pipeline {
                 junit 'target/**/*.xml'
             }
         }
+stage('image build') {
+            steps {
+                sh 'docker build -t pratap524/ng-server .'
+            }
+        }
+
 }
 }
