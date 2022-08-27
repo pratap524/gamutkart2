@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tomcat-deployment
+  labels:
+    app: tomcat-pod
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: tomcat-pod
+  template:
+    metadata:
+      labels:
+        app: tomcat-pod
+    spec:
+      containers:
+      - name: tomcat-server
+        image: nageshvkn/gamutkart-img
+        ports:
+        - containerPort: 8080
+        command: ["/bin/sh"]
+        args: ["-c", "/root/apache-tomcat-8.5.38/bin/startup.sh; while true; do sleep 1; done"] 
