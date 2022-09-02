@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: tomcat-server
-        image: nageshvkn/gamutkart-img
+        image: pratap524/webserver
         ports:
         - containerPort: 8080
         command: ["/bin/sh"]
